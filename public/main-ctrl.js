@@ -69,18 +69,22 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
     
     $scope.findForProvince = function (){
         var newSearch = $scope.newSearchclimate;
-        console.log("finding recursos for the Province " + newSearch.provincia);
         var date = document.getElementById("date").value;
-        var URL = $scope.url + "?fecha=" + date + "&provincia=" + newSearch.provincia;
-        $http.get(URL).then(function(response){
-            console.log("Data received " + JSON.stringify(response.data, null, 2));
-            $scope.climates = response.data;
-            if (response.status == 200) $scope.information = "Encontrado los campos de la Provincia " + newSearch.provincia + " por la fecha " + date;
-        }, 
-        function (error){
-            $scope.information = "No encontrado los campos de la Provincia " + newSearch.provincia + " por la fecha " + date;
-        });
+        if (newSearch == undefined) $scope.information = "Introduce el campo Provincia correctamente, por favor";
+        else
+        {
+            var URL = $scope.url + "?fecha=" + date + "&provincia=" + newSearch.provincia;
         
+            console.log("finding recursos for the Province " + newSearch.provincia);
+            $http.get(URL).then(function(response){
+                console.log("Data received " + JSON.stringify(response.data, null, 2));
+                $scope.climates = response.data;
+                if (response.status == 200) $scope.information = "Encontrado los campos de la Provincia " + newSearch.provincia + " por la fecha " + date;
+            }, 
+            function (error){
+                $scope.information = "No encontrado los campos de la Provincia " + newSearch.provincia + " con la fecha busqueada. Introduce el año y la provincia correctos";
+            });
+        }
     };
     
 }]);
