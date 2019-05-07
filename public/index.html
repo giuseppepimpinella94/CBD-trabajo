@@ -15,31 +15,8 @@
         <div id="divpagina"><h5>Página: {{pagina}}</h5></div>
         <div>
             <h3> Elige año, mes y día
-            <select class="selectpicker" ng-model="newSearchclimate.year">
-              <option>2014</option>
-              <option>2015</option>
-              <option>2016</option>
-            </select>
-            <select class="selectpicker" ng-model="newSearchclimate.month">
-              <option>Enero</option>
-              <option>Febrero</option>
-              <option>Marzo</option>
-              <option>Abril</option>
-              <option>Mayo</option>
-              <option>Junio</option>
-              <option>Julio</option>
-              <option>Agosto</option>
-              <option>Septiembre</option>
-              <option>Octubre</option>
-              <option>Noviembre</option>
-              <option>Diciembre</option>
-            </select>
-            <select class="selectpicker" ng-model="newSearchclimate.day">
-                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
-                <option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option>
-                <option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
-            </select>
-            <button class="btn btn-primary" ng-click="findYearandMonth()">Buscar</button>
+            <input type="date" id="date" placeholder="yyyy/MM/dd" min="2014-01-01" max="2018-12-31" required />
+            <button class="btn btn-primary" ng-click="finddate()">Buscar</button>
             </h3>
         </div>
         <div>
@@ -49,7 +26,6 @@
             </h3>
         </div>
         <div>
-            <button class="btn btn-primary" ng-click="getTotal()">Mira TODO</button>
             <button class="btn btn-primary" ng-click="getPagination(1)">Mira con Paginación</button>
         </div>
         <div>
