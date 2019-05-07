@@ -2,15 +2,6 @@ module.exports = function(app, BASE_PATH, economy_stats) {
 
 var path = "";
 
-// GET /api/v1/economy-stats/docs/
-
-path = BASE_PATH + "/docs/";
-
-app.get(path, (req,res)=>{
-    res.redirect('https://documenter.getpostman.com/view/6893446/S1EH21Qt');
-});
-
-
 // GET /api/v1/economy-stats/loadInitialData
 
 path = BASE_PATH + "/loadInitialData";
