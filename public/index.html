@@ -1,6 +1,6 @@
-<html ng-app="MiniPostmanEconomy">
+<html ng-app="MiniPostmanclimate">
     <head>
-        <title>Mini Postman Economy-stats</title>
+        <title>Mini Postman climate-stats</title>
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angular/angular.min.js"></script>
@@ -14,21 +14,41 @@
         <div><h3>Información: {{information}}</h3></div>
         <div id="divpagina"><h5>Página: {{pagina}}</h5></div>
         <div>
-            <h3> Busqueada por año
-            <input class="form-control" ng-model="newSearchEconomy.from" placeholder="Desde"/>
-            <input class="form-control" ng-model="newSearchEconomy.to" placeholder="Hasta"/>
-            <button class="btn btn-primary" ng-click="findFromYears()">Buscar</button>
+            <h3> Elige año, mes y día
+            <select class="selectpicker" ng-model="newSearchclimate.year">
+              <option>2014</option>
+              <option>2015</option>
+              <option>2016</option>
+            </select>
+            <select class="selectpicker" ng-model="newSearchclimate.month">
+              <option>Enero</option>
+              <option>Febrero</option>
+              <option>Marzo</option>
+              <option>Abril</option>
+              <option>Mayo</option>
+              <option>Junio</option>
+              <option>Julio</option>
+              <option>Agosto</option>
+              <option>Septiembre</option>
+              <option>Octubre</option>
+              <option>Noviembre</option>
+              <option>Diciembre</option>
+            </select>
+            <select class="selectpicker" ng-model="newSearchclimate.day">
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+                <option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option>
+                <option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
+            </select>
+            <button class="btn btn-primary" ng-click="findYearandMonth()">Buscar</button>
             </h3>
         </div>
         <div>
-            <h3> Busqueada por País
-            <input class="form-control" ng-model="newSearchEconomy.country" placeholder="País"/>
-            <button class="btn btn-primary" ng-click="findForCountry()">Buscar</button>
+            <h3> Busqueada por Provincia
+            <input class="form-control" ng-model="newSearchclimate.provincia" placeholder="Provincia"/>
+            <button class="btn btn-primary" ng-click="findForProvince()">Buscar</button>
             </h3>
         </div>
         <div>
-            <button class="btn btn-primary" ng-click="initializeTodo()">Inicializa TODO</button>
-            <button class="btn btn-danger" ng-click="deleteAllEconomy()">Borrar TODO</button>
             <button class="btn btn-primary" ng-click="getTotal()">Mira TODO</button>
             <button class="btn btn-primary" ng-click="getPagination(1)">Mira con Paginación</button>
         </div>
@@ -39,43 +59,34 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>País</th>
-                    <th>Año</th>
-                    <th>Crecimiento PIB</th>
-                    <th>Crecimiento PIB para industria</th>
-                    <th>PIB ahorro bruto</th>
-                    <th>Acción</th>
+                    <th>Estación</th>
+                    <th>Provincia</th>
+                    <th>Temperatura máxima (ºC)</th>
+                    <th>Temperatura mínima (ºC)</th>
+                    <th>Temperatura media (ºC)</th>
+                    <th>Racha (km/h)</th>
+                    <th>Velocidad máxima (km/h)</th>
+                    <th>Precipitación 00-24h (mm)</th>
+                    <th>Precipitación 00-06h (mm)</th>
+                    <th>Precipitación 06-12h (mm)</th>
+                    <th>Precipitación 12-18h (mm)</th>
+                    <th>Precipitación 18-24h (mm)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="economy in economies">
-                    <td>{{ economy.country }}</td>
-                    <td>{{ economy.year }}</td>
-                    <td>{{ economy.gdp_growth_stats }}</td>
-                    <td>{{ economy.industry_gdp_stats }}</td>
-                    <td>{{ economy.gross_sav_gdp_stats }}</td>
-                    <td><button class="btn btn-danger" ng-click="deleteFieldEconomy(economy.country, economy.year)">Borrar</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input class="form-control" ng-model="newFieldEconomy.country" placeholder="Nuevo pais"/>
-                    </td>
-                    <td>
-                        <input class="form-control" ng-model="newFieldEconomy.year" placeholder="Nuevo año"/>
-                    </td>
-                    <td>
-                        <input class="form-control" ng-model="newFieldEconomy.gdp_growth_stats" placeholder="Nuevo Crecimiento PIB"/>
-                    </td>
-                    <td>
-                        <input class="form-control" ng-model="newFieldEconomy.industry_gdp_stats" placeholder="Nuevo Crecimiento PIB para industria"/>
-                    </td>
-                    <td>
-                        <input class="form-control" ng-model="newFieldEconomy.gross_sav_gdp_stats" placeholder="Nuevo PIB ahorro bruto"/>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" ng-click="addNewFieldEconomy()">Añadir</button>
-                        <button class="btn btn-info" ng-click="modifyEconomy()">Modificar</button>
-                    </td>
+                <tr ng-repeat="climate in climates">
+                    <td>{{ climate.estacion }}</td>
+                    <td>{{ climate.provincia }}</td>
+                    <td>{{ climate.temperatura_maxima }}</td>
+                    <td>{{ climate.temperatura_minima }}</td>
+                    <td>{{ climate.temperatura_media }}</td>
+                    <td>{{ climate.racha }}</td>
+                    <td>{{ climate.velocidad_maxima }}</td>
+                    <td>{{ climate.precipitacion_primero }}</td>
+                    <td>{{ climate.precipitacion_segundo }}</td>
+                    <td>{{ climate.precipitacion_tercero }}</td>
+                    <td>{{ climate.precipitacion_cuarto }}</td>
+                    <td>{{ climate.precipitacion_quinto }}</td>
                 </tr>
             </tbody>
         </table>

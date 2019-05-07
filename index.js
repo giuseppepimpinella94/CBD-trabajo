@@ -9,23 +9,23 @@ app.use('/',express.static( path.join(__dirname,"public")));
 app.use(bodyParser.json());
 
 
-// ___________________________economy_stats_____________________________________
+// ___________________________climate_stats_____________________________________
 
-var economyAPI = require("./economy-stats-api");
+var climateAPI = require("./climate-stats-api");
 const BASE_PATH = "/api";
 
 //MongoDB--------------------------------------------------------------------------------------
 
 const MongoClient = require("mongodb").MongoClient;
-const uri = "mongodb+srv://Giuseppe:Giuseppe@sos-qhbyw.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://userrobo3t:nb9eD646UtuwLR9h@mongodb-cbd-9xmsw.azure.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
-var economy_stats = [{}];
+var climate_stats = [{}];
 
 client.connect(err => {
-  economy_stats = client.db("sos1819-09").collection("economy-stats");
-  economyAPI.checkALL(app, BASE_PATH, economy_stats);
-  console.log("Connected to economy-stats");
+  climate_stats = client.db("CBD-progetto").collection("climatestats");
+  climateAPI.checkALL(app, BASE_PATH, climate_stats);
+  console.log("Connected to climate-stats");
 });
 
 //_____________________________Listen port______________________________________

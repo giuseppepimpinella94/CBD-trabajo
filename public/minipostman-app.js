@@ -1,3 +1,3 @@
 /* global angular */
-var app = angular.module("MiniPostmanEconomy",[]);
-console.log("Modular MiniPostman Economy-stats initialized!");
+var app = angular.module("MiniPostmanclimate",[]);
+console.log("Modular MiniPostman climate-stats initialized!");
