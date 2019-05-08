@@ -72,7 +72,13 @@ app.get(BASE_PATH, (req,res)=>{
             });
         }
     }
-    else res.sendStatus(400);
+    else 
+    {
+        climate_stats.find({},{projection : {_id : 0}}).toArray((err, climateArray)=>{
+            if(err) console.log("Error: "+err);
+            res.send(climateArray);
+        });
+    }
     
     /*
     else if(limit)
