@@ -9,7 +9,7 @@ app.get(BASE_PATH, (req,res)=>{
     var provincia = req.query.provincia;
     var limit = req.query.limit;
     var offset = req.query.offset;
-    var date = req.query.fecha;
+    var date = req.query.FECHA;
     var temperaturamaxima = req.query.temperatura_maxima;
     var temperaturaminima = req.query.temperatura_minima;
     var temperaturamedia = req.query.temperatura_media;
@@ -65,20 +65,14 @@ app.get(BASE_PATH, (req,res)=>{
         }
         else // ?fecha= senza niente
         {
-            climate_stats.find({"fecha":date},{projection : {_id : 0}}).toArray((err, climateArray)=>{
+            climate_stats.find({"FECHA":date},{projection : {_id : 0}}).toArray((err, climateArray)=>{
                 if(err) console.log("Error: "+err);
                 if (climateArray.length == 0) res.sendStatus(404);
                 else res.send(climateArray);
             });
         }
     }
-    else 
-    {
-        climate_stats.find({},{projection : {_id : 0}}).toArray((err, climateArray)=>{
-            if(err) console.log("Error: "+err);
-            res.send(climateArray);
-        });
-    }
+    else res.sendStatus(400);
     
     /*
     else if(limit)
