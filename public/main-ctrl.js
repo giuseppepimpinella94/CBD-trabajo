@@ -9,7 +9,7 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
     {
         console.log("Requesting API");
         var date = document.getElementById("date").value;
-        var URL = $scope.url + "?fecha=" + date;
+        var URL = $scope.url + "?FECHA=" + date;
         $http.get(URL).then(function(response){
             console.log("Data received " + JSON.stringify(response.data, null, 2));
             $scope.climates = response.data;
@@ -53,7 +53,7 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
     $scope.finddate = function (){
         var date = document.getElementById("date").value;
         console.log("finding recursos for " + date);
-        var URL = $scope.url + "?fecha=" + date;
+        var URL = $scope.url + "?FECHA=" + date;
         
         $http.get(URL).then(function(response){
             console.log("Found stations for " + date);
@@ -62,7 +62,7 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
             if (response.status == 200) $scope.information = "Encontrado los campos del " + date;
         }, 
         function (error){
-            $scope.information = " Introduzca la fecha correctamente, por favor ";
+            $scope.information = " Introduzca la FECHA correctamente, por favor ";
         });
         
     };
@@ -73,18 +73,33 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         if (newSearch == undefined) $scope.information = "Introduce el campo Provincia correctamente, por favor";
         else
         {
-            var URL = $scope.url + "?fecha=" + date + "&provincia=" + newSearch.provincia;
+            var URL = $scope.url + "?FECHA=" + date + "&PROVINCIA=" + newSearch.provincia;
         
             console.log("finding recursos for the Province " + newSearch.provincia);
             $http.get(URL).then(function(response){
                 console.log("Data received " + JSON.stringify(response.data, null, 2));
                 $scope.climates = response.data;
-                if (response.status == 200) $scope.information = "Encontrado los campos de la Provincia " + newSearch.provincia + " por la fecha " + date;
+                if (response.status == 200) $scope.information = "Encontrado los campos de la Provincia " + newSearch.provincia + " por la FECHA " + date;
             }, 
             function (error){
-                $scope.information = "No encontrado los campos de la Provincia " + newSearch.provincia + " con la fecha busqueada. Introduce el año y la provincia correctos";
+                $scope.information = "No encontrado los campos de la Provincia " + newSearch.provincia + " con la FECHA busqueada. Introduce el año y la provincia correctos";
             });
         }
+    };
+    
+    $scope.findforaltitude = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&ALTITUDMIN=" + newSearch.altitudemin + "&ALTITUDMAX=" + newSearch.altitudemax;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con altitud entre " + newSearch.altitudemin + " y " + newSearch.altitudemax;
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con altitud entre " + newSearch.altitudemin + " y " + newSearch.altitudemax + ", o simplemente input inserido incorrectamente.";
+        });
     };
     
 }]);

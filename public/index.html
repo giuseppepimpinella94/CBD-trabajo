@@ -26,7 +26,11 @@
             </h3>
         </div>
         <div>
-            <button class="btn btn-primary" ng-click="getPagination(1)">Mira con Paginación</button>
+            <h3> Elige una altitud mínima y máxima
+            <input class="form-control" ng-model="newSearchclimate.altitudemin" placeholder="Altitud mínima"/>
+            <input class="form-control" ng-model="newSearchclimate.altitudemax" placeholder="Altitud máxima"/>
+            <button class="btn btn-primary" ng-click="findforaltitude()">Buscar por la altitud</button>
+            </h3>
         </div>
         <div>
             <button id="btnprvpg" class="btn btn-info" ng-click="getPagination(pagina-1)">Pagina anterior</button>
@@ -35,34 +39,38 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Estación</th>
+                    <th>FECHA</th>
+                    <th>ID ESTACION</th>
+                    <th>Nombre EST</th>
                     <th>Provincia</th>
+                    <th>Altitud</th>
                     <th>Temperatura máxima (ºC)</th>
                     <th>Temperatura mínima (ºC)</th>
                     <th>Temperatura media (ºC)</th>
                     <th>Racha (km/h)</th>
-                    <th>Velocidad máxima (km/h)</th>
+                    <th>Velocidad media (km/h)</th>
                     <th>Precipitación 00-24h (mm)</th>
-                    <th>Precipitación 00-06h (mm)</th>
-                    <th>Precipitación 06-12h (mm)</th>
-                    <th>Precipitación 12-18h (mm)</th>
-                    <th>Precipitación 18-24h (mm)</th>
+                    <th>PresMIN</th>
+                    <th>PresMAX</th>
+                    <th>Sol</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="climate in climates">
-                    <td>{{ climate.estacion }}</td>
-                    <td>{{ climate.provincia }}</td>
-                    <td>{{ climate.temperatura_maxima }}</td>
-                    <td>{{ climate.temperatura_minima }}</td>
-                    <td>{{ climate.temperatura_media }}</td>
-                    <td>{{ climate.racha }}</td>
-                    <td>{{ climate.velocidad_maxima }}</td>
-                    <td>{{ climate.precipitacion_primero }}</td>
-                    <td>{{ climate.precipitacion_segundo }}</td>
-                    <td>{{ climate.precipitacion_tercero }}</td>
-                    <td>{{ climate.precipitacion_cuarto }}</td>
-                    <td>{{ climate.precipitacion_quinto }}</td>
+                    <td>{{ climate.FECHA }}</td>
+                    <td>{{ climate.INDICATIVO }}</td>
+                    <td>{{ climate.NOMBRE }}</td>
+                    <td>{{ climate.PROVINCIA }}</td>
+                    <td>{{ climate.ALTITUD }}</td>
+                    <td>{{ climate.TMAX }}</td>
+                    <td>{{ climate.TMIN }}</td>
+                    <td>{{ climate.TMEDIA }}</td>
+                    <td>{{ climate.RACHA }}</td>
+                    <td>{{ climate.VELMEDIA }}</td>
+                    <td>{{ climate.PRECIPITACION }}</td>
+                    <td>{{ climate.PRESMIN }}</td>
+                    <td>{{ climate.PRESMAX }}</td>
+                    <td>{{ climate.SOL }}</td>
                 </tr>
             </tbody>
         </table>
