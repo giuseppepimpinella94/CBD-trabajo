@@ -47,8 +47,105 @@ app.get(BASE_PATH, (req,res)=>{
         {
             if (altitudmin && altitudmax)
             {
-                var min = parseInt(altitudmin, 10); var max = parseInt(altitudmax, 10); 
-                climate_stats.find({"FECHA":date, "ALTITUD" : { $gte : min, $lte : max}}, { projection : {_id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0} }).toArray((err, climateArray)=>{
+                var min = parseInt(altitudmin, 10); var max = parseInt(altitudmax, 10);
+                    climate_stats.aggregate([
+                                        { 
+                                            "$addFields": {
+                                             "ALTITUD": {
+                                                "$convert": {
+                                                    "input": "$ALTITUD",
+                                                    "to": "int",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$TMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRECIPITACION" : {
+                                                    "$convert": {
+                                                    "input": "$PRECIPITACION",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMIN" : {
+                                                    "$convert": {
+                                                    "input": "$TMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMAX" : {
+                                                    "$convert": {
+                                                    "input": "$TMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "VELMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$VELMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "RACHA" : {
+                                                    "$convert": {
+                                                    "input": "$RACHA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "SOL" : {
+                                                    "$convert": {
+                                                    "input": "$SOL",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMIN" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMAX" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }
+                                            }
+                                        }, {
+                                            
+                                            "$match": {
+                                                "ALTITUD" : { $gte : min, $lte : max}, 
+                                                "FECHA":date
+                                                }
+                                            },
+                                            {
+                                            "$project": {
+                                                _id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0
+                                                }
+                                            }
+                                           
+                                    ]).toArray((err, climateArray)=>{
                     if(err) console.log("Error: "+err);
                     if (climateArray.length == 0) res.sendStatus(404);
                     else res.send(climateArray);
@@ -60,8 +157,105 @@ app.get(BASE_PATH, (req,res)=>{
         {
             if (temperaturamediamin && temperaturamediamax)
             {
-                var min = parseInt(temperaturamediamin, 10); var max = parseInt(temperaturamediamax, 10); 
-                climate_stats.find({"FECHA":date, "TMEDIA" : { $gte : min, $lte : max}}, { projection : {_id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0} }).toArray((err, climateArray)=>{
+                var min = parseFloat(temperaturamediamin); var max = parseFloat(temperaturamediamax);
+                    climate_stats.aggregate([
+                                        { 
+                                            "$addFields": {
+                                             "ALTITUD": {
+                                                "$convert": {
+                                                    "input": "$ALTITUD",
+                                                    "to": "int",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$TMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRECIPITACION" : {
+                                                    "$convert": {
+                                                    "input": "$PRECIPITACION",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMIN" : {
+                                                    "$convert": {
+                                                    "input": "$TMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMAX" : {
+                                                    "$convert": {
+                                                    "input": "$TMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "VELMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$VELMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "RACHA" : {
+                                                    "$convert": {
+                                                    "input": "$RACHA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "SOL" : {
+                                                    "$convert": {
+                                                    "input": "$SOL",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMIN" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMAX" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }
+                                            }
+                                        }, {
+                                            
+                                            "$match": {
+                                                "TMEDIA" : { $gte : min, $lte : max}, 
+                                                "FECHA":date
+                                                }
+                                            },
+                                            {
+                                            "$project": {
+                                                _id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0
+                                                }
+                                            }
+                                           
+                                    ]).toArray((err, climateArray)=>{
                     if(err) console.log("Error: "+err);
                     if (climateArray.length == 0) res.sendStatus(404);
                     else res.send(climateArray);
@@ -73,8 +267,105 @@ app.get(BASE_PATH, (req,res)=>{
         {
             if (precipitazionimin && precipitazionimax)
             {
-                var min = parseInt(precipitazionimin, 10); var max = parseInt(precipitazionimax, 10); 
-                climate_stats.find({"FECHA":date, "PRECIPITACION" : { $gte : min, $lte : max}}, { projection : {_id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0} }).toArray((err, climateArray)=>{
+                var min = parseFloat(precipitazionimin); var max = parseFloat(precipitazionimax);
+                    climate_stats.aggregate([
+                                        { 
+                                            "$addFields": {
+                                             "ALTITUD": {
+                                                "$convert": {
+                                                    "input": "$ALTITUD",
+                                                    "to": "int",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$TMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRECIPITACION" : {
+                                                    "$convert": {
+                                                    "input": "$PRECIPITACION",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMIN" : {
+                                                    "$convert": {
+                                                    "input": "$TMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "TMAX" : {
+                                                    "$convert": {
+                                                    "input": "$TMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "VELMEDIA" : {
+                                                    "$convert": {
+                                                    "input": "$VELMEDIA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "RACHA" : {
+                                                    "$convert": {
+                                                    "input": "$RACHA",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "SOL" : {
+                                                    "$convert": {
+                                                    "input": "$SOL",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMIN" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMIN",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }, 
+                                                "PRESMAX" : {
+                                                    "$convert": {
+                                                    "input": "$PRESMAX",
+                                                    "to": "double",
+                                                    "onNull": 0,
+                                                    "onError": 0
+                                                    }
+                                                }
+                                            }
+                                        }, {
+                                            
+                                            "$match": {
+                                                "PRECIPITACION" : { $gte : min, $lte : max}, 
+                                                "FECHA":date
+                                                }
+                                            },
+                                            {
+                                            "$project": {
+                                                _id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0
+                                                }
+                                            }
+                                           
+                                    ]).toArray((err, climateArray)=>{
                     if(err) console.log("Error: "+err);
                     if (climateArray.length == 0) res.sendStatus(404);
                     else res.send(climateArray);
@@ -123,7 +414,104 @@ app.get(BASE_PATH, (req,res)=>{
         } 
         else // ?fecha= senza niente
         {
-            climate_stats.find({"FECHA":date}, { projection : {_id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0} }).toArray((err, climateArray)=>{
+           climate_stats.aggregate([
+                                    { 
+                                        "$addFields": {
+                                         "ALTITUD": {
+                                            "$convert": {
+                                                "input": "$ALTITUD",
+                                                "to": "int",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "TMEDIA" : {
+                                                "$convert": {
+                                                "input": "$TMEDIA",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "PRECIPITACION" : {
+                                                "$convert": {
+                                                "input": "$PRECIPITACION",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "TMIN" : {
+                                                "$convert": {
+                                                "input": "$TMIN",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "TMAX" : {
+                                                "$convert": {
+                                                "input": "$TMAX",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "VELMEDIA" : {
+                                                "$convert": {
+                                                "input": "$VELMEDIA",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "RACHA" : {
+                                                "$convert": {
+                                                "input": "$RACHA",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "SOL" : {
+                                                "$convert": {
+                                                "input": "$SOL",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "PRESMIN" : {
+                                                "$convert": {
+                                                "input": "$PRESMIN",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }, 
+                                            "PRESMAX" : {
+                                                "$convert": {
+                                                "input": "$PRESMAX",
+                                                "to": "double",
+                                                "onNull": 0,
+                                                "onError": 0
+                                                }
+                                            }
+                                        }
+                                        
+                                    }, {
+                                        
+                                        "$match": {
+                                            "FECHA":date
+                                            }
+                                        },
+                                        {
+                                        "$project": {
+                                            _id : 0, HORATMIN : 0, HORATMAX : 0, DIR : 0, HORARACHA : 0, HORAPRESMAX : 0, HORAPRESMIN : 0
+                                            }
+                                        }
+                                       
+                                ]).toArray((err, climateArray)=>{
                 if(err) console.log("Error: "+err);
                 if (climateArray.length == 0) res.sendStatus(404);
                 else res.send(climateArray);

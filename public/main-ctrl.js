@@ -102,4 +102,34 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         });
     };
     
+    $scope.findfortmedia = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&TMEDIAMIN=" + newSearch.tmediaminima + "&TMEDIAMAX=" + newSearch.tmediamaxima;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con temperatura media entre " + newSearch.tmediaminima + "° y " + newSearch.tmediamaxima + "°";
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con temperatura media entre " + newSearch.tmediaminima + "° y " + newSearch.tmediamaxima + "°, o simplemente input inserido incorrectamente.";
+        });
+    };
+    
+    $scope.findforprecipitacion = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&PRECIPITACIONMIN=" + newSearch.precminima + "&PRECIPITACIONMAX=" + newSearch.precmaxima;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima;
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima + " o simplemente input inserido incorrectamente.";
+        });
+    };
+    
 }]);
