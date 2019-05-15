@@ -7,12 +7,17 @@
         
         <script src="minipostman-app.js"></script>
         <script src="main-ctrl.js"></script>
-    
+        <style>
+            .indicators {
+                border-spacing: 15px;
+                border: 1px;
+                padding: 5px;
+            }
+            
+        </style>
     </head>
-    
     <body ng-controller="MainCtrl">
         <div><h3>Información: {{information}}</h3></div>
-        <div id="divpagina"><h5>Página: {{pagina}}</h5></div>
         <div>
             <h3> Elige año, mes y día
             <input type="date" id="date" placeholder="yyyy/MM/dd" min="1920-01-01" max="2019-05-02" required />
@@ -25,31 +30,73 @@
             <button class="btn btn-primary" ng-click="findForProvince()">Buscar por provincia de esa fecha</button>
             </h3>
         </div>
-        <div>
-            <h3> Elige una Altitud mínima y máxima
-            <input class="form-control" ng-model="newSearchclimate.altitudemin" placeholder="Altitud mínima"/>
-            <input class="form-control" ng-model="newSearchclimate.altitudemax" placeholder="Altitud máxima"/>
-            <button class="btn btn-primary" ng-click="findforaltitude()">Buscar por la Altitud</button>
-            </h3>
-        </div>
-        <div>
-            <h3> Elige una Temperatura media mínima y máxima
-            <input class="form-control" ng-model="newSearchclimate.tmediaminima" placeholder="Temperatura mínima"/>
-            <input class="form-control" ng-model="newSearchclimate.tmediamaxima" placeholder="Temperatura máxima"/>
-            <button class="btn btn-primary" ng-click="findfortmedia()">Buscar por la Temperatura media</button>
-            </h3>
-        </div>
-        <div>
-            <h3> Elige la Precipitacion mínima y máxima
-            <input class="form-control" ng-model="newSearchclimate.precminima" placeholder="Precipitacion mínima"/>
-            <input class="form-control" ng-model="newSearchclimate.precmaxima" placeholder="Precipitacion máxima"/>
-            <button class="btn btn-primary" ng-click="findforprecipitacion()">Buscar por la Precipitacion</button>
-            </h3>
-        </div>
-        <div>
-            <button id="btnprvpg" class="btn btn-info" ng-click="getPagination(pagina-1)">Pagina anterior</button>
-            <button id="btnsuccpg" class="btn btn-info" ng-click="getPagination(pagina+1)">Pagina siguiente</button>
-        </div>
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                       <div>
+                            <h3 class="indicators"> Elige una Altitud mínima y máxima
+                            <input class="form-control" ng-model="newSearchclimate.altitudemin" placeholder="Altitud mínima"/>
+                            <input class="form-control" ng-model="newSearchclimate.altitudemax" placeholder="Altitud máxima"/>
+                            <button class="btn btn-primary" ng-click="findforaltitude()">Buscar por la Altitud</button>
+                            </h3>
+                        </div> 
+                    </td>
+                    <td>
+                        <div>
+                            <h3 class="indicators"> Elige el valor Sol mínimo y máximo
+                            <input class="form-control" ng-model="newSearchclimate.solmin" placeholder="Velocidad mínima"/>
+                            <input class="form-control" ng-model="newSearchclimate.solmax" placeholder="Velocidad máxima"/>
+                            <button class="btn btn-primary" ng-click="findforsol()">Buscar por la Sol</button>
+                            </h3>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <h3 class="indicators"> Elige una Temperatura media mínima y máxima     
+                            <input class="form-control" ng-model="newSearchclimate.tmediaminima" placeholder="Temperatura mínima"/>
+                            <input class="form-control" ng-model="newSearchclimate.tmediamaxima" placeholder="Temperatura máxima"/>
+                            <button class="btn btn-primary" ng-click="findfortmedia()">Buscar por la Temperatura media</button>
+                            </h3>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <h3 class="indicators"> Elige la Precipitacion mínima y máxima
+                            <input class="form-control" ng-model="newSearchclimate.precminima" placeholder="Precipitacion mínima"/>
+                            <input class="form-control" ng-model="newSearchclimate.precmaxima" placeholder="Precipitacion máxima"/>
+                            <button class="btn btn-primary" ng-click="findforprecipitacion()">Buscar por la Precipitacion</button>
+                            </h3>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <h3 class="indicators"> Elige la Velocidad media mínima y máxima
+                            <input class="form-control" ng-model="newSearchclimate.velmediamin" placeholder="Velocidad mínima"/>
+                            <input class="form-control" ng-model="newSearchclimate.velmediamax" placeholder="Velocidad máxima"/>
+                            <button class="btn btn-primary" ng-click="findforvelocidadmedia()">Buscar por la Velocidad media</button>
+                            </h3>
+                        </div>
+                    </td>
+                    <td>
+                            <div>
+                                <h3 class="indicators"> Elige la Racha mínima y máxima
+                                <input class="form-control" ng-model="newSearchclimate.rachamin" placeholder="Racha mínima"/>
+                                <input class="form-control" ng-model="newSearchclimate.rachamax" placeholder="Racha máxima"/>
+                                <button class="btn btn-primary" ng-click="findforracha()">Buscar por la Racha</button>
+                                </h3>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
         <table class="table">
             <thead>
                 <tr>
