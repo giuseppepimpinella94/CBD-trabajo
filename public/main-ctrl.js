@@ -81,10 +81,10 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         $http.get(URL).then(function(response){
             console.log("Data received " + JSON.stringify(response.data, null, 2));
             $scope.climates = response.data;
-            if (response.status == 200) $scope.information = "Encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima;
+            if (response.status == 200) $scope.information = "Encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima + " mm";
         }, 
         function (error){
-            $scope.information = "No encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima + " o simplemente input inserido incorrectamente.";
+            $scope.information = "No encontrado los campos con precipitacion entre " + newSearch.precminima + " y " + newSearch.precmaxima + " mm, o simplemente input inserido incorrectamente.";
         });
     };
     
@@ -96,10 +96,10 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         $http.get(URL).then(function(response){
             console.log("Data received " + JSON.stringify(response.data, null, 2));
             $scope.climates = response.data;
-            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax;
+            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax + " km/h";
         }, 
         function (error){
-            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax + " o simplemente input inserido incorrectamente.";
+            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax + " km/h, o simplemente input inserido incorrectamente.";
         });
     };
     
@@ -111,10 +111,10 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         $http.get(URL).then(function(response){
             console.log("Data received " + JSON.stringify(response.data, null, 2));
             $scope.climates = response.data;
-            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax;
+            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax + " km/h";
         }, 
         function (error){
-            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax + " o simplemente input inserido incorrectamente.";
+            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax + " km/h o simplemente input inserido incorrectamente.";
         });
     };
     
