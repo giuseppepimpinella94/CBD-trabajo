@@ -132,4 +132,49 @@ app.controller("MainCtrl", ["$scope", "$http", function($scope, $http){
         });
     };
     
+    $scope.findforvelocidadmedia = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&VELMEDIAMIN=" + newSearch.velmediamin + "&VELMEDIAMAX=" + newSearch.velmediamax;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax;
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.velmediamin + " y " + newSearch.velmediamax + " o simplemente input inserido incorrectamente.";
+        });
+    };
+    
+    $scope.findforracha = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&RACHAMIN=" + newSearch.rachamin + "&RACHAMAX=" + newSearch.rachamax;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax;
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.rachamin + " y " + newSearch.rachamax + " o simplemente input inserido incorrectamente.";
+        });
+    };
+    
+    $scope.findforsol = function (){
+        var newSearch = $scope.newSearchclimate;
+        var date = document.getElementById("date").value;
+        var URL = $scope.url + "?FECHA=" + date + "&SOLMIN=" + newSearch.solmin + "&SOLMAX=" + newSearch.solmax;
+    
+        $http.get(URL).then(function(response){
+            console.log("Data received " + JSON.stringify(response.data, null, 2));
+            $scope.climates = response.data;
+            if (response.status == 200) $scope.information = "Encontrado los campos con velocidad media entre " + newSearch.solmin + " y " + newSearch.solmax;
+        }, 
+        function (error){
+            $scope.information = "No encontrado los campos con velocidad media entre " + newSearch.solmin + " y " + newSearch.solmax + " o simplemente input inserido incorrectamente.";
+        });
+    };
+    
 }]);

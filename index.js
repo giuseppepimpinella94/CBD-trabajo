@@ -21,16 +21,6 @@ const uri = "mongodb+srv://userrobo3t:nb9eD646UtuwLR9h@mongodb-cbd-9xmsw.azure.m
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var climate_stats = [{}];
-/*
-console.log("Starting......");
-client.connect(err => {
-  climate_stats = client.db("CBD-progetto").collection("climatestats");
-  climate_stats.find().forEach( function (x) {
-    x.ALTITUD = parseInt(x.ALTITUD);
-    climate_stats.save(x);
-  });
-});
-*/
 
 client.connect(err => {
   climate_stats = client.db("CBD-progetto").collection("climatestats");
